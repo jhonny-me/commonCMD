@@ -1,0 +1,19 @@
+#!/bin/zsh
+
+
+dateString="`date +%Y-%m-%d`"
+
+fileName="$dateString-$1.markdown"
+
+touch $fileName
+
+fileHeader="---
+layout: post
+title:  $1
+date:   $dateString
+categorie: weekly
+---"
+
+echo $fileHeader >$fileName
+
+vim $fileName
