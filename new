@@ -5,13 +5,27 @@ dateString="`date +%Y-%m-%d`"
 
 fileName="$dateString-$1.markdown"
 
+if [[ -f "$fileName" ]]; then
+	#statements
+	echo "Y. 覆盖打开"
+	echo "N. 重新打开"
+	printf "文件已存在，选择打开方式:"
+	read rewrite
+
+	if [[ '$rewrite' != 'y' ]]; then
+		#statements
+		vim $fileName
+		exit 0
+	fi
+fi
+
 touch $fileName
 
 fileHeader="---
 layout: post
 title:  $1
 date:   $dateString
-categorie: weekly
+categorie: daily
 ---"
 
 echo $fileHeader >$fileName
